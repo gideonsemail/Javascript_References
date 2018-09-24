@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+    let age = 100
+    let age2 = age;
+    console.log(age, age2)
+    age = 200
+    //200, 100
+
+    let name = 'Wes'
+    let name2 = name;
+    name = 'wesley'
+    console.log(name, name2)
+    //wesley, wes
+
+    //COnclusion? the valuse of string,s numbers, and booleans go into it, and if you change the values, its ok, not going to change the other wone.
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    // and we want to make a copy of it.
+
+    let team = players;
+    console.log(players, team)
+
+    // You might think we can just do something like this:
+    team[3] = 'Lux'
+    // however what happens when we update that array?
+
+    // The original array changes becauise we referencede taht array, unlike above. We need to first copy unlike what we did with numbers, strings, and booleans. If you update ana rray, it will alsways refernece back.
+
+    // now here is the problem!
+    // oh no - we have edited the original array too!
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+    // So, how do we fix this? We take a copy instead!
+    // one way
+
+    let team2 = players.slice()
+
+    // or create a new array and concat the old one in
+      let team3 = [].concat(players)
+
+    // or use the new ES6 Spread
+    let team4 = [...players]
+    team[3] = 'hee haww'
+
+    //or another method:
+    let team5 = Array.from(players)
+    // now when we update it, the original one isn't changed
+
+
+    // The same thing goes for objects, let's say we have a person object
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+    // and think we make a copy:
+    // how do we take a copy instead?
+    let cap2 = Object.assign({}, person, { number: 99, age: 12})
+    console.log(cap2);
+    // We will hopefully soon see the object ...spread
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    //Can only go one level deep. he went through the social example.
+
+    // Side note:
+    JSON.stringify//pass in an object to turn it into a string.
+    JSON.parse//turns it back into an object.
+
+</body>
+</html>
